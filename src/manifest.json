@@ -1,0 +1,22 @@
+{
+    "manifest_version": 2,
+    "version": "0.1",
+    "name": "AntiProc",
+    "options_page": "options/options.html",
+    "background": {
+        "scripts": ["bundle.js"]
+    },
+    "permissions": [
+        "storage",
+        "tabs"
+    ],
+    "icons": {
+       "128": "logo.png",
+       "16": "logo.png",
+       "48": "logo.png"
+    },
+    "web_accessible_resources": [
+        "https://code.jquery.com/*",
+        "https://cdnjs.cloudfare.com/*"
+    ]
+}

@@ -1,0 +1,5 @@
+src.pem
+webpack.config.js
+node_modules/
+.vscode/
+.idea/
