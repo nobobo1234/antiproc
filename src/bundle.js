@@ -24961,32 +24961,22 @@ var chromep = new ChromePromise(chrome);
 var storage = new Storage(chromep);
 var moment = __webpack_require__(1);
 
-chrome.tabs.onUpdated.addListener(function () {
-    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(tabId, info) {
-        var tab, sites, times, currentday, day, time, from, to, url;
+chrome.webNavigation.onBeforeNavigate.addListener(function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(info) {
+        var sites, times, currentday, day, time, from, to, url;
         return regeneratorRuntime.wrap(function _callee$(_context) {
             while (1) {
                 switch (_context.prev = _context.next) {
                     case 0:
-                        if (!(info.status === 'complete')) {
-                            _context.next = 13;
-                            break;
-                        }
-
-                        _context.next = 3;
-                        return chromep.tabs.get(tabId);
-
-                    case 3:
-                        tab = _context.sent;
-                        _context.next = 6;
+                        _context.next = 2;
                         return storage.get('sites');
 
-                    case 6:
+                    case 2:
                         sites = _context.sent;
-                        _context.next = 9;
+                        _context.next = 5;
                         return storage.get('times');
 
-                    case 9:
+                    case 5:
                         times = _context.sent;
                         currentday = moment().format('dddd').toLowerCase();
                         day = times.times.find(function (e) {
@@ -24998,16 +24988,16 @@ chrome.tabs.onUpdated.addListener(function () {
                             from = moment().hour(parseInt(time[0].split(":")[0])).minute(time[0].split(":")[1]).seconds(0);
                             to = moment().hour(parseInt(time[1].split(":")[0])).minute(time[1].split(":")[1]).seconds(0);
 
-                            if (isSiteOkay(sites.sites, tab.url) === false) {
+                            if (isSiteOkay(sites.sites, info.url) === false) {
                                 if (moment().isBetween(from, to)) {
                                     url = chrome.runtime.getURL('forbidden.html');
 
-                                    chrome.tabs.update(tabId, { url: url });
+                                    chrome.tabs.update(info.tabId, { url: url });
                                 }
                             }
                         }
 
-                    case 13:
+                    case 9:
                     case 'end':
                         return _context.stop();
                 }
@@ -25015,7 +25005,7 @@ chrome.tabs.onUpdated.addListener(function () {
         }, _callee, undefined);
     }));
 
-    return function (_x, _x2) {
+    return function (_x) {
         return _ref.apply(this, arguments);
     };
 }());

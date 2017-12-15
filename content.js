@@ -23,11 +23,10 @@ $(async () => {
         }
     }
     $('ul.tabs').tabs(); //initialize the tabs feature
-    const blocked_times = await storage.get('times');
-    if(blocked_times.times) {
+    if(times.times) {
         $('.days').each((i, e) => {
             let __times;
-            const day = blocked_times.times.find(ce => $(e).find('p').text().toLowerCase() === ce.day);
+            const day = times.times.find(ce => $(e).find('p').text().toLowerCase() === ce.day);
             if(day.on)
                 $(e).find('.day-checkbox').prop('checked', true);
             if(!day.on)
@@ -58,7 +57,6 @@ $(async () => {
     delete collection item and remove from chrome storage
     */
     $('.delete').click(async (event) => {
-        const data = await storage.get('sites');
         const i = data.sites.indexOf($(event.currentTarget).parent().text().split(/ +/g)[0].trim());
         data.sites.splice(i, 1);
         await storage.set({ sites: data.sites });
@@ -85,6 +83,17 @@ $(async () => {
             times.push(day);
         });
         await storage.set({ times });
+        const sites = await storage.get('sites');
+        const currentday = moment().format('dddd').toLowerCase();
+        const day = times.find((e) => e.day === currentday);
+        if(day.time && day.on) {
+            const time = day.time.split("-");
+            const from = moment().hour(parseInt(time[0].split(":")[0])).minute(time[0].split(":")[1]).seconds(0);
+            const to = moment().hour(parseInt(time[1].split(":")[0])).minute(time[1].split(":")[1]).seconds(0);
+            if(moment().isBetween(from, to)) {
+                location.href = '../forbidden.html'
+            }
+        }
     });
     //check if checkboxes change
     $('.day-checkbox').change(async (checkbox) => {
@@ -137,9 +146,19 @@ $(async () => {
 
 //check if sites submitbutton is clicked
 $('.submitbutton').click(async (event) => {
-    const textarea = $('.sites-to-block')[0].value.split('\n').map(e => e.trim());
+    let textarea = $('.sites-to-block')[0].value.split('\n').map(e => e.trim());
+    const blocked_sites = await storage.get('sites');
     let sites = unique(textarea);
     for(let site of sites) {
+        if(blocked_sites.sites) {
+            if(blocked_sites.sites.includes(site)) {
+                $('.flash-message').text('One of these sites already exists!');
+                setTimeout(() => {
+                    $('.flash-message').text('');
+                }, 3000);
+                return true;
+            }
+        }
         $('.sites-list').append(`<li class="valign-wrapper collection-item">${site}<button class="btn-floating btn-small delete">
                 <i class="material-icons">not_interested</i>
             </button>

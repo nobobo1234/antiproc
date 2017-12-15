@@ -1960,7 +1960,7 @@ function loadLocale(name) {
         try {
             oldLocale = globalLocale._abbr;
             var aliasedRequire = require;
-            __webpack_require__(450)("./" + name);
+            __webpack_require__(451)("./" + name);
             getSetGlobalLocale(oldLocale);
         } catch (e) {}
     }
@@ -4632,7 +4632,7 @@ return hooks;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(449)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(450)(module)))
 
 /***/ }),
 /* 2 */
@@ -24960,7 +24960,7 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 //import libraries, constants and helpers;
 var ChromePromise = __webpack_require__(447);
 var Storage = __webpack_require__(448);
-var constants = __webpack_require__(451);
+var constants = __webpack_require__(449);
 var moment = __webpack_require__(1);
 var chromep = new ChromePromise();
 var storage = new Storage(chromep);
@@ -24971,7 +24971,7 @@ var unique = function unique(array) {
 }; //unique array filterer
 
 $(_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-    var times, currentday, day, time, from, to, blocked_times, data, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, site;
+    var times, currentday, day, time, from, to, data, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, site;
 
     return regeneratorRuntime.wrap(function _callee4$(_context4) {
         while (1) {
@@ -25001,16 +25001,10 @@ $(_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
                         }
                     }
                     $('ul.tabs').tabs(); //initialize the tabs feature
-                    _context4.next = 7;
-                    return storage.get('times');
-
-                case 7:
-                    blocked_times = _context4.sent;
-
-                    if (blocked_times.times) {
+                    if (times.times) {
                         $('.days').each(function (i, e) {
                             var __times = void 0;
-                            var day = blocked_times.times.find(function (ce) {
+                            var day = times.times.find(function (ce) {
                                 return $(e).find('p').text().toLowerCase() === ce.day;
                             });
                             if (day.on) $(e).find('.day-checkbox').prop('checked', true);
@@ -25025,90 +25019,85 @@ $(_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
                         $('.timepicker').prop('disabled', true);
                     }
                     //get all the sites from the storage and add them to the collection
-                    _context4.next = 11;
+                    _context4.next = 8;
                     return storage.get('sites');
 
-                case 11:
+                case 8:
                     data = _context4.sent;
 
                     if (data.sites) $('.amount-blocked-sites').text(data.sites.length);else $('.amount-blocked-sites').text(0);
 
                     if (!data.sites) {
-                        _context4.next = 33;
+                        _context4.next = 30;
                         break;
                     }
 
                     _iteratorNormalCompletion = true;
                     _didIteratorError = false;
                     _iteratorError = undefined;
-                    _context4.prev = 17;
+                    _context4.prev = 14;
 
                     for (_iterator = data.sites[Symbol.iterator](); !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                         site = _step.value;
 
                         $('.sites-list').append('<li class="valign-wrapper collection-item">' + site + '<button class="btn-floating btn-small delete">\n                    <i class="material-icons">not_interested</i>\n                </button>\n            </li>');
                     }
-                    _context4.next = 25;
+                    _context4.next = 22;
                     break;
 
-                case 21:
-                    _context4.prev = 21;
-                    _context4.t0 = _context4['catch'](17);
+                case 18:
+                    _context4.prev = 18;
+                    _context4.t0 = _context4['catch'](14);
                     _didIteratorError = true;
                     _iteratorError = _context4.t0;
 
-                case 25:
-                    _context4.prev = 25;
-                    _context4.prev = 26;
+                case 22:
+                    _context4.prev = 22;
+                    _context4.prev = 23;
 
                     if (!_iteratorNormalCompletion && _iterator.return) {
                         _iterator.return();
                     }
 
-                case 28:
-                    _context4.prev = 28;
+                case 25:
+                    _context4.prev = 25;
 
                     if (!_didIteratorError) {
-                        _context4.next = 31;
+                        _context4.next = 28;
                         break;
                     }
 
                     throw _iteratorError;
 
-                case 31:
-                    return _context4.finish(28);
-
-                case 32:
+                case 28:
                     return _context4.finish(25);
 
-                case 33:
+                case 29:
+                    return _context4.finish(22);
+
+                case 30:
                     /*
                     check if delete button for sites is clicked, if clicked, 
                     delete collection item and remove from chrome storage
                     */
                     $('.delete').click(function () {
                         var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(event) {
-                            var data, i;
+                            var i;
                             return regeneratorRuntime.wrap(function _callee$(_context) {
                                 while (1) {
                                     switch (_context.prev = _context.next) {
                                         case 0:
-                                            _context.next = 2;
-                                            return storage.get('sites');
-
-                                        case 2:
-                                            data = _context.sent;
                                             i = data.sites.indexOf($(event.currentTarget).parent().text().split(/ +/g)[0].trim());
 
                                             data.sites.splice(i, 1);
-                                            _context.next = 7;
+                                            _context.next = 4;
                                             return storage.set({ sites: data.sites });
 
-                                        case 7:
+                                        case 4:
                                             $(event.currentTarget).parent().remove();
                                             $('.amount-blocked-sites').text(data.sites.length);
 
-                                        case 9:
+                                        case 6:
                                         case 'end':
                                             return _context.stop();
                                     }
@@ -25125,7 +25114,8 @@ $(_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
                         twelvehour: false
                     }).change(function () {
                         var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(event) {
-                            var times;
+                            var times, sites, currentday, day, _time, _from, _to;
+
                             return regeneratorRuntime.wrap(function _callee2$(_context2) {
                                 while (1) {
                                     switch (_context2.prev = _context2.next) {
@@ -25152,6 +25142,27 @@ $(_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
                                             return storage.set({ times: times });
 
                                         case 4:
+                                            _context2.next = 6;
+                                            return storage.get('sites');
+
+                                        case 6:
+                                            sites = _context2.sent;
+                                            currentday = moment().format('dddd').toLowerCase();
+                                            day = times.find(function (e) {
+                                                return e.day === currentday;
+                                            });
+
+                                            if (day.time && day.on) {
+                                                _time = day.time.split("-");
+                                                _from = moment().hour(parseInt(_time[0].split(":")[0])).minute(_time[0].split(":")[1]).seconds(0);
+                                                _to = moment().hour(parseInt(_time[1].split(":")[0])).minute(_time[1].split(":")[1]).seconds(0);
+
+                                                if (moment().isBetween(_from, _to)) {
+                                                    location.href = '../forbidden.html';
+                                                }
+                                            }
+
+                                        case 10:
                                         case 'end':
                                             return _context2.stop();
                                     }
@@ -25248,18 +25259,18 @@ $(_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
                         };
                     }());
 
-                case 36:
+                case 33:
                 case 'end':
                     return _context4.stop();
             }
         }
-    }, _callee4, undefined, [[17, 21, 25, 33], [26,, 28, 32]]);
+    }, _callee4, undefined, [[14, 18, 22, 30], [23,, 25, 29]]);
 })));
 
 //check if sites submitbutton is clicked
 $('.submitbutton').click(function () {
     var _ref5 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6(event) {
-        var textarea, sites, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, site, data;
+        var textarea, blocked_sites, sites, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, site, data;
 
         return regeneratorRuntime.wrap(function _callee6$(_context6) {
             while (1) {
@@ -25268,51 +25279,85 @@ $('.submitbutton').click(function () {
                         textarea = $('.sites-to-block')[0].value.split('\n').map(function (e) {
                             return e.trim();
                         });
+                        _context6.next = 3;
+                        return storage.get('sites');
+
+                    case 3:
+                        blocked_sites = _context6.sent;
                         sites = unique(textarea);
                         _iteratorNormalCompletion2 = true;
                         _didIteratorError2 = false;
                         _iteratorError2 = undefined;
-                        _context6.prev = 5;
+                        _context6.prev = 8;
+                        _iterator2 = sites[Symbol.iterator]();
 
-                        for (_iterator2 = sites[Symbol.iterator](); !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                            site = _step2.value;
-
-                            $('.sites-list').append('<li class="valign-wrapper collection-item">' + site + '<button class="btn-floating btn-small delete">\n                <i class="material-icons">not_interested</i>\n            </button>\n        </li>');
+                    case 10:
+                        if (_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done) {
+                            _context6.next = 21;
+                            break;
                         }
-                        _context6.next = 13;
+
+                        site = _step2.value;
+
+                        if (!blocked_sites.sites) {
+                            _context6.next = 17;
+                            break;
+                        }
+
+                        if (!blocked_sites.sites.includes(site)) {
+                            _context6.next = 17;
+                            break;
+                        }
+
+                        $('.flash-message').text('One of these sites already exists!');
+                        setTimeout(function () {
+                            $('.flash-message').text('');
+                        }, 3000);
+                        return _context6.abrupt('return', true);
+
+                    case 17:
+                        $('.sites-list').append('<li class="valign-wrapper collection-item">' + site + '<button class="btn-floating btn-small delete">\n                <i class="material-icons">not_interested</i>\n            </button>\n        </li>');
+
+                    case 18:
+                        _iteratorNormalCompletion2 = true;
+                        _context6.next = 10;
                         break;
 
-                    case 9:
-                        _context6.prev = 9;
-                        _context6.t0 = _context6['catch'](5);
+                    case 21:
+                        _context6.next = 27;
+                        break;
+
+                    case 23:
+                        _context6.prev = 23;
+                        _context6.t0 = _context6['catch'](8);
                         _didIteratorError2 = true;
                         _iteratorError2 = _context6.t0;
 
-                    case 13:
-                        _context6.prev = 13;
-                        _context6.prev = 14;
+                    case 27:
+                        _context6.prev = 27;
+                        _context6.prev = 28;
 
                         if (!_iteratorNormalCompletion2 && _iterator2.return) {
                             _iterator2.return();
                         }
 
-                    case 16:
-                        _context6.prev = 16;
+                    case 30:
+                        _context6.prev = 30;
 
                         if (!_didIteratorError2) {
-                            _context6.next = 19;
+                            _context6.next = 33;
                             break;
                         }
 
                         throw _iteratorError2;
 
-                    case 19:
-                        return _context6.finish(16);
+                    case 33:
+                        return _context6.finish(30);
 
-                    case 20:
-                        return _context6.finish(13);
+                    case 34:
+                        return _context6.finish(27);
 
-                    case 21:
+                    case 35:
                         $('.amount-blocked-sites').text(sites.length);
                         $('.delete').off();
                         $('.delete').click(function () {
@@ -25349,22 +25394,22 @@ $('.submitbutton').click(function () {
                                 return _ref6.apply(this, arguments);
                             };
                         }());
-                        _context6.next = 26;
+                        _context6.next = 40;
                         return storage.get('sites');
 
-                    case 26:
+                    case 40:
                         data = _context6.sent;
 
                         if (data.sites) sites = data.sites.concat(sites);
-                        _context6.next = 30;
+                        _context6.next = 44;
                         return storage.set({ sites: sites });
 
-                    case 30:
+                    case 44:
                     case 'end':
                         return _context6.stop();
                 }
             }
-        }, _callee6, undefined, [[5, 9, 13, 21], [14,, 16, 20]]);
+        }, _callee6, undefined, [[8, 23, 27, 35], [28,, 30, 34]]);
     }));
 
     return function (_x4) {
@@ -25613,6 +25658,43 @@ module.exports = function () {
 
 /***/ }),
 /* 449 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.times = [{
+    on: null,
+    time: null,
+    day: "sunday"
+}, {
+    on: null,
+    time: null,
+    day: "monday"
+}, {
+    on: null,
+    time: null,
+    day: "tuesday"
+}, {
+    on: null,
+    time: null,
+    day: "wednesday"
+}, {
+    on: null,
+    time: null,
+    day: "thursday"
+}, {
+    on: null,
+    time: null,
+    day: "friday"
+}, {
+    on: null,
+    time: null,
+    day: "saturday"
+}];
+
+/***/ }),
+/* 450 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -25640,7 +25722,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 450 */
+/* 451 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -25895,44 +25977,7 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 450;
-
-/***/ }),
-/* 451 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.times = [{
-    on: null,
-    time: null,
-    day: "sunday"
-}, {
-    on: null,
-    time: null,
-    day: "monday"
-}, {
-    on: null,
-    time: null,
-    day: "tuesday"
-}, {
-    on: null,
-    time: null,
-    day: "wednesday"
-}, {
-    on: null,
-    time: null,
-    day: "thursday"
-}, {
-    on: null,
-    time: null,
-    day: "friday"
-}, {
-    on: null,
-    time: null,
-    day: "saturday"
-}];
+webpackContext.id = 451;
 
 /***/ })
 /******/ ]);

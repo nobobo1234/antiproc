@@ -1,5 +1,5 @@
 src.pem
-webpack.config.js
+.eslintrc
 node_modules/
 .vscode/
 .idea/
