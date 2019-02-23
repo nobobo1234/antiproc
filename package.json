@@ -21,7 +21,7 @@
     "babel-loader": "^7.1.5",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "webpack": "^4.29.3"
+    "webpack": "^4.29.5"
   },
   "dependencies": {
     "chrome-promise": "^3.0.4",
