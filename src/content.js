@@ -1,8 +1,8 @@
 //import libraries, constants and helpers;
-const ChromePromise = require('chrome-promise');
-const Storage = require('./src/helpers/storage');
-const constants = require('./src/helpers/constants');
-const moment = require('moment');
+const ChromePromise = require('chrome-promise/index');
+const Storage = require('../helpers/storage');
+const constants = require('../helpers/constants');
+const moment = require('moment/moment');
 const chromep = new ChromePromise;
 const storage = new Storage(chromep);
 const unique = array => [...new Set(array)].filter(e => e !== ""); //unique array filterer
