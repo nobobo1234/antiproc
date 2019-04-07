@@ -2,26 +2,17 @@
     "manifest_version": 2,
     "version": "0.1",
     "name": "AntiProc",
-    "options_page": "options/options.html",
+    "options_page": "options.html",
     "background": {
-        "scripts": ["bundle.js"]
+        "scripts": ["background_script.js"]
     },
     "permissions": [
-        "storage",
-        "tabs",
-        "webNavigation"
+        "storage", "tabs", "webNavigation"
     ],
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
     "icons": {
-       "128": "logo.png",
-       "16": "logo.png",
-       "48": "logo.png"
-    },
-    "web_accessible_resources": [
-        "https://code.jquery.com/*",
-        "https://cdnjs.cloudfare.com/*"
-    ],
-    "browser_action": {
-        "default_title": "AntiProc",
-        "default_popup": "popup.html"
+        "128": "imgs/logo.png",
+        "16": "imgs/logo.png",
+        "48": "imgs/logo.png"
     }
 }

@@ -1,36 +1,36 @@
-exports.times = [
+export default [
     {
-        on: null,
+        on: false,
         time: null,
         day: "sunday"
     },
     {
-        on: null,
+        on: false,
         time: null,
         day: "monday"
     },
     {
-        on: null,
+        on: false,
         time: null,
         day: "tuesday"
     },
     {
-        on: null,
+        on: false,
         time: null,
         day: "wednesday"
     },
     {
-        on: null,
+        on: false,
         time: null,
         day: "thursday"
     },
     {
-        on: null,
+        on: false,
         time: null,
         day: "friday"
     },
     {
-        on: null,
+        on: false,
         time: null,
         day: "saturday"
     }

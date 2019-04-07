@@ -1,5 +1,3 @@
-src.pem
-.eslintrc
-node_modules/
-.vscode/
-.idea/
+/dist
+/node_modules
+/.code

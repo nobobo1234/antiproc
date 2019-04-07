@@ -1,6 +1,6 @@
 module.exports = class {
-    constructor(chrome) {
-        this.storage = chrome.storage.sync;
+    constructor(storage) {
+        this.storage = storage;
     }
 
     async set(object) {
