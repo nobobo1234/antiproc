@@ -25,3 +25,8 @@ browser.webNavigation.onBeforeNavigate.addListener(async tab => {
         }
     }
 });
+
+browser.browserAction.onClicked.addListener(tab => {
+    const optionsPage = browser.runtime.getURL('options.html');
+    browser.tabs.create({ url: optionsPage, active: true })
+})
