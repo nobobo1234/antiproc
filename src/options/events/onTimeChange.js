@@ -16,7 +16,7 @@ export default async (event, storage) => {
             const day = {
                 ...helpers.find(constants, 'day', parent.find('p').text().toLowerCase())
             }
-            const updatedTimes = times.filter(e => e.day === day.day);
+            const updatedTimes = times.filter(e => e.day !== day.day);
 
             day.on = parent.find('.day-checkbox').is(':checked');
             const from = moment(timepickers.eq(0).val(), 'HH:mm');
@@ -33,13 +33,13 @@ export default async (event, storage) => {
         const currentDay = moment().format('dddd').toLowerCase();
         const day = helpers.find(times, 'day', currentDay);
         if(day) {
-            const time = day.time.map(helpers.time);
+            const time = day.time.split('-').map(helpers.time);
             const from = moment().hour(time[0].hour).minute(time[0].minute).seconds(0);
             const to = moment().hour(time[1].hour).minute(time[1].minute).seconds(0);
             if(moment().isBetween(from, to)) {
                 const tab = await browser.tabs.getCurrent();
                 const forbiddenUrl = browser.runtime.getURL('forbidden.html');
-                browser.tabs.update(tab, { url: forbiddenUrl })
+                browser.tabs.update(tab.id, { url: forbiddenUrl })
             }
         }
     }

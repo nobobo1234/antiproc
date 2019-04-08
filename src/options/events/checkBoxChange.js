@@ -19,7 +19,7 @@ export default async (event, storage) => {
             const day = {
                 ...find(constants, 'day', parent.find('p').text().toLowerCase())
             }
-            const updatedTimes = times.filter(e => e.day === day.day);
+            const updatedTimes = times.filter(e => e.day !== day.day);
     
             day.on = checkbox.is(':checked');
             const from = moment(timepickers.eq(0).val(), 'HH:mm');

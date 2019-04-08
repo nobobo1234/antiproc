@@ -19,10 +19,9 @@ browser.webNavigation.onBeforeNavigate.addListener(async tab => {
         const time = day.time.split('-').map(helpers.time);
         const from = moment().hour(time[0].hour).minute(time[0].minute).seconds(0);
         const to = moment().hour(time[1].hour).minute(time[1].minute).seconds(0);
-        if(moment().isBetween(from, to) && helpers.isSiteOkay(sites, tab.url)) {
-            const tab = await browser.tabs.getCurrent();
+        if(moment().isBetween(from, to) && !helpers.isSiteOkay(sites, tab.url)) {
             const forbiddenUrl = browser.runtime.getURL('forbidden.html');
-            browser.tabs.update(tab, { url: forbiddenUrl })
+            await browser.tabs.update(tab.tabId, { url: forbiddenUrl })
         }
     }
 });

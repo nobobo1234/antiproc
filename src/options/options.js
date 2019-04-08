@@ -30,7 +30,7 @@ $(async () => {
             if(moment().isBetween(from, to)) {
                 const tab = await browser.tabs.getCurrent();
                 const forbiddenUrl = browser.runtime.getURL('forbidden.html');
-                browser.tabs.update(tab, { url: forbiddenUrl })
+                browser.tabs.update(tab.id, { url: forbiddenUrl })
             }
         }
 

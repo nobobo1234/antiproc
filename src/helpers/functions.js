@@ -23,3 +23,5 @@ export const isSiteOkay = (arraySites, currentSite) => {
     };
     return true;
 }
+
+export default { time, find, unique, isSiteOkay }

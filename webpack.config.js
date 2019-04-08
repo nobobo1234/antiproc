@@ -49,7 +49,6 @@ module.exports = (env, argv) => {
             },
             plugins: [
                 new HtmlWebpackPlugin({
-                    title: 'AntiProc options',
                     filename: 'options.html',
                     template: __dirname + '/src/options/options.html',
                     templateParameters: {
@@ -57,6 +56,46 @@ module.exports = (env, argv) => {
                     }
                 })
             ]
+        },
+        {
+            entry: __dirname + '/src/forbidden/forbidden.js',
+            output: {
+                path: __dirname + '/dist/',
+                filename: 'forbidden.js'
+            },
+            module: {
+                rules: [
+                    {
+                        test: /\.html$/,
+                        use: 'html-loader'
+                    },
+                    {
+                        test: /\.gif$/, 
+                        use: [
+                            {
+                                loader: 'file-loader',
+                                options: {
+                                    outputPath: 'imgs',
+                                    name: '[name].[ext]'
+                                }
+                            }
+                        ],
+                    },
+                    {
+                        test: /\.css$/,
+                        use: ['style-loader', 'css-loader']
+                    }
+                ]
+            },
+            plugins: [
+                new HtmlWebpackPlugin({
+                    filename: 'forbidden.html',
+                    template: __dirname + '/src/forbidden/forbidden.html',
+                    files: {
+                        css: ["forbidden.css"]
+                    }
+                })
+            ],
         }
     ]
 }
