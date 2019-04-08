@@ -9,6 +9,7 @@ import $ from 'cash-dom'
 import onTimeChange from './events/onTimeChange';
 import deleteClick from './events/deleteClick';
 import checkBoxChange from './events/checkBoxChange';
+import submitClick from './events/submitClick';
 
 const storage = new Storage(browser.storage.sync);
 
@@ -23,7 +24,7 @@ $(async () => {
         const currentDay = moment().format('dddd').toLowerCase();
         const day = helpers.find(blockTimes, 'day', currentDay);
         if(day) {
-            const time = day.time.map(helpers.time);
+            const time = day.time.split('-').map(helpers.time);
             const from = moment().hour(time[0].hour).minute(time[0].minute).seconds(0);
             const to = moment().hour(time[1].hour).minute(time[1].minute).seconds(0);
             if(moment().isBetween(from, to)) {
@@ -63,7 +64,7 @@ $(async () => {
     if(sites) $('.amount-blocked-sites').text(sites.length);
 
     if(sites.length) {
-        for(let site of data.sites) {
+        for(let site of sites) {
             $('.sites-list').append(`
                 <li class="valign-wrapper collection-item">
                     ${site}
@@ -89,39 +90,9 @@ $(async () => {
     $('.day-checkbox').on('change', async (event) => {
         await checkBoxChange(event, storage);
     });
-});
 
-//check if sites submitbutton is clicked
-$('.submitbutton').on('click', async (event) => {
-    let textarea = $('.sites-to-block')[0].value.split('\n').map(e => e.trim());
-    const blocked_sites = await storage.get('sites');
-    let sites = unique(textarea);
-    for(let site of sites) {
-        if(blocked_sites.sites.length > 0) {
-            if(blocked_sites.sites.includes(site)) {
-                $('.flash-message').text('One of these sites already exists!');
-                setTimeout(() => {
-                    $('.flash-message').text('');
-                }, 3000);
-                return true;
-            }
-        }
-        $('.sites-list').append(`<li class="valign-wrapper collection-item">${site}<button class="btn-floating btn-small delete">
-                <i class="material-icons">not_interested</i>
-            </button>
-        </li>`)
-    }
-    $('.amount-blocked-sites').text(sites.length);
-    $('.delete').off();
-    $('.delete').on('click', async (event) => {
-        const data = await storage.get('sites');
-        const i = data.sites.indexOf($(event.currentTarget).parent().text());
-        data.sites.splice(i, 1);
-        await storage.set({ sites: data.sites });
-        $(event.currentTarget).parent().remove();
-        $('.amount-blocked-sites').text(data.sites.length);    
+    //check if sites submitbutton is clicked
+    $('.submitbutton').on('click', async (event) => {
+        await submitClick(event, storage);
     });
-    const data = await storage.get('sites');
-    if(data.sites) sites = data.sites.concat(sites);
-    await storage.set({ sites });
 });

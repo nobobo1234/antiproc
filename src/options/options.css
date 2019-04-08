@@ -15,3 +15,23 @@ html {
     grid-template-columns: repeat(auto-fit, minmax(6rem, 1fr));
     grid-gap: 2rem;
 }
+
+.delete {
+    padding-left: 2rem;
+}
+
+.small-text {
+    font-size: 1rem;
+}
+
+.padding-small {
+    padding: 1rem;
+}
+
+.medium-text {
+    font-size: 1.4rem;
+}
+
+.brand-logo {
+    padding-left: 1rem;
+}
