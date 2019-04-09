@@ -11,9 +11,16 @@ module.exports = (env, argv) => {
             },
             watch: argv.mode === 'development' ? true : false,
             plugins: [
-                new CopyPlugin([{
-                    from: __dirname + '/src/manifest.json',
-                }])
+                new CopyPlugin([
+                    {
+                        from: __dirname + '/src/manifest.json',
+                    },
+                    {
+                        from: __dirname + '/src/imgs/*',
+                        to: __dirname + '/dist/imgs/',
+                        flatten: true
+                    }
+                ]),
             ]
         },
         {
