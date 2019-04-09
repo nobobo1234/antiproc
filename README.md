@@ -15,5 +15,5 @@ The recommended node version is the latest one, in my case it's `10.15.3`, then 
 4. Then run `yarn run build` or `npm run build` to build the extension.
 
 ## Screenshots
-!(https://i.ibb.co/j8VkS2H/screen.png)[Screenshot 1]  
-!(https://i.ibb.co/W5DLyPv/screenshot.png)[Screenshot 2]
+![Screenshot 1](https://i.ibb.co/j8VkS2H/screen.png)  
+![Screenshot 2](https://i.ibb.co/W5DLyPv/screenshot.png)
