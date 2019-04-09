@@ -3,7 +3,7 @@ import { unique } from '../../helpers/functions';
 import deleteClick from './deleteClick';
 
 export default async (event, storage) => {
-    const storageS = await storage.get('sites');
+    const storageS = await storage.get({ sites: [] });
     const blockedSites = storageS.sites;
 
     let textarea = $('.sites-to-block')

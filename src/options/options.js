@@ -1,7 +1,6 @@
 import 'materialize-css';
 import browser from 'webextension-polyfill';
 import Storage from '../helpers/storage';
-import * as constants from '../helpers/constants';
 import * as helpers from '../helpers/functions';
 import moment from 'moment';
 import $ from 'cash-dom'
@@ -17,7 +16,7 @@ import './options.css';
 import 'materialize-css/dist/css/materialize.min.css';
 
 $(async () => {
-    const storageT = await storage.get('times');
+    let storageT = await storage.get({ times: [] });
     const blockTimes = storageT.times;
     
     if(blockTimes.length) {
@@ -58,7 +57,7 @@ $(async () => {
     M.Tabs.init(document.querySelector('.tabs')) //initialize the tabs feature
     
     //get all the sites from the storage and add them to the collection
-    const storageS = await storage.get('sites');
+    const storageS = await storage.get({ sites: [] });
     const sites = storageS.sites;
 
     if(sites) $('.amount-blocked-sites').text(sites.length);

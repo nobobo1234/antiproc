@@ -18,7 +18,7 @@ export const isSiteOkay = (arraySites, currentSite) => {
             if(currentSite.includes(site)) return false
         } else if(site.match(/\*\w+\*/)) {
             let modifiedSite = site.slice(1, -1);
-            if(site.includes(modifiedsite)) return false;
+            if(currentSite.includes(modifiedSite)) return false;
         }
     };
     return true;
