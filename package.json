@@ -1,6 +1,6 @@
 {
   "name": "antiproc",
-  "version": "1.0.0",
+  "version": "0.3",
   "description": "Helps against procrasination",
   "main": "index.js",
   "repository": "https://github.com/nobobo1234/antiproc.git",
