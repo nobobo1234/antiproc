@@ -1,7 +1,7 @@
 import $ from 'cash-dom';
 
 export default async (event, storage) => {
-    const storageS = await storage.get('sites');
+    const storageS = await storage.get({ sites: [] });
     const sites = storageS.sites;
     const site = $(event.currentTarget).parent().text().split(/ +/g)[0].trim();
     const i = sites.indexOf(site);

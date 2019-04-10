@@ -4,7 +4,7 @@ import constants from '../../helpers/constants';
 import moment from 'moment';
 
 export default async (event, storage) => {
-    const storageT = await storage.get('times');
+    const storageT = await storage.get({ times: [] });
     const times = storageT.times;
 
     //if changed, save to chrome storage

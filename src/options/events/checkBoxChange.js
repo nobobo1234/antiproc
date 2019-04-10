@@ -5,7 +5,7 @@ import constants from '../../helpers/constants'
 export default async (event, storage) => {
     const checkbox = $(event.target);
     const parent = $(event.target).parents().eq(2);
-    const storageT = await storage.get('times');
+    const storageT = await storage.get({ times: [] });
     const times = storageT.times;
     const timepickers = parent.find('.timepicker');
 
