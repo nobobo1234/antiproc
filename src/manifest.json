@@ -22,10 +22,5 @@
         "16": "imgs/antiproc16x16.png",
         "48": "imgs/antiproc48x48.png",
         "64": "imgs/antiproc64x64.png"
-    },
-    "browser_specific_settings": {
-        "gecko": {
-            "id": "noahvanboven@gmail.com"
-        }
     }
 }
