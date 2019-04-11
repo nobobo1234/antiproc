@@ -1,6 +1,7 @@
 import $ from 'cash-dom';
 import { find } from '../../helpers/functions'; 
-import constants from '../../helpers/constants'
+import constants from '../../helpers/constants';
+import moment from 'moment';
 
 export default async (event, storage) => {
     const checkbox = $(event.target);
@@ -26,6 +27,9 @@ export default async (event, storage) => {
             const to = moment(timepickers.eq(1).val(), 'HH:mm');
             if(to.isAfter(from)) {
                 day.time = `${timepickers.eq(0).val()}-${timepickers.eq(1).val()}`;
+            } else {
+                day.time = null;
+                day.on = false;
             }
 
             updatedTimes.push(day);
@@ -38,16 +42,21 @@ export default async (event, storage) => {
             const day = {
                 ...find(constants, 'day', parent.find('p').text().toLowerCase())
             }
-            const updatedTimes = times.filter(e => e.day === day.day);
+            const updatedTimes = times.filter(e => e.day !== day.day);
     
             day.on = checkbox.is(':checked');
+            console.log(day.on)
             const from = moment(timepickers.eq(0).val(), 'HH:mm');
             const to = moment(timepickers.eq(1).val(), 'HH:mm');
             if(from.isAfter(to)) {
                 day.time = `${timepickers.eq(0).val()}-${timepickers.eq(1).val()}`;
+            } else {
+                day.time = null;
+                day.on = false;
             }
 
             updatedTimes.push(day);
+            console.log(updatedTimes)
             await storage.set({ times: updatedTimes });
         }
     }    

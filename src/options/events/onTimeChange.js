@@ -23,6 +23,9 @@ export default async (event, storage) => {
             const to = moment(timepickers.eq(1).val(), 'HH:mm');
             if(to.isAfter(from)) {
                 day.time = `${timepickers.eq(0).val()}-${timepickers.eq(1).val()}`;
+            } else {
+                day.time = null;
+                day.on = false;
             }
             updatedTimes.push(day);
             await storage.set({ times: updatedTimes });

@@ -1,6 +1,6 @@
 {
     "manifest_version": 2,
-    "version": "0.3",
+    "version": "0.4",
     "description": "An extension for maintaining your productivity by blocking sites",
     "name": "AntiProc",
     "options_ui": {

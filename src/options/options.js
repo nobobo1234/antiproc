@@ -36,7 +36,10 @@ $(async () => {
         $('.day').each((i, e) => {
             const el = $(e);
             const day = helpers.find(blockTimes, 'day', el.find('p').text().toLowerCase());
-            if(!day) return true;
+            if(!day) {
+                el.find('.timepicker').prop('disabled', true);
+                return true;
+            };
 
             if(day.on) {
                 el.find('.day-checkbox').prop('checked', true);

@@ -8,9 +8,10 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack --mode=development",
-    "build": "webpack --mode=production"
+    "build": "webpack --mode=production && cd dist/ && bestzip extension.zip *"
   },
   "devDependencies": {
+    "bestzip": "^2.1.2",
     "copy-webpack-plugin": "^5.0.2",
     "css-loader": "^2.1.1",
     "ejs-loader": "^0.3.3",

@@ -16,6 +16,10 @@ html {
     grid-gap: 2rem;
 }
 
+.blocklist {
+    padding: 2rem !important;
+}
+
 .delete {
     padding-left: 2rem;
 }
